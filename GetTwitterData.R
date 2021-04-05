@@ -7,8 +7,8 @@ source("FunctionsTwitterApi.R")
 #my_filename = string to be used as a part of the filename
 
 #For example
-query_string = "#jenkins"
-my_filename = "jenkins"
+query_string = "test automation"
+my_filename = "test_automation_twitter"
 
 #get_TwitterData = function (query_string, my_filename) {
 
