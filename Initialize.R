@@ -8,7 +8,7 @@ rm(list=ls())
 #** A folder "data" will be created for saving files (if such folder does not exist)
 #** EDIT THE FOLLOWING LINE, set your own work directory
 #setwd("K:/My Documents/Projects/TrendMining_2017/TrendMining")
-setwd("C:/Users/mmantyla/Dropbox/Teach/2018_Trends_update_git/TrendMining")
+setwd("H:/CourseProjects/TrendMining")
 my_work_dir = getwd()
 my_data_dir = "data"
 if (!file.exists(my_data_dir)) {
@@ -19,7 +19,7 @@ if (!file.exists(my_data_dir)) {
 #** Set your own StackOverflow API key here (or use the default below)
 #** EDIT THE FOLLOWING LINE for your own API key
 #api_key = "9raZ36FkYGFHDSNrW)gdsw((" TODO old file name edit out
-so_api_key = "9raZ36FkYGFHDSNrW)gdsw(("
+so_api_key = "***"
 
 
 
@@ -36,7 +36,7 @@ getoldtweets_path = paste(getwd(),"/GetOldTweets-java-master", sep="")
 #** EDIT THE FOLLOWING LINE with YOUR OWN Scopus API key
 #install.packages("rscopus", dependencies = TRUE)
 library("rscopus")
-#set_api_key("<your-own-scopus-api-key>")
+set_api_key("***")
 #alternatively you may store it a personal file somewhere else. 
-source("C:/Users/mmantyla/Dropbox/Research - Publications/2017 Agile Book Chapter/Scripts/SetScopusApiKey.R") 
+#source("C:/Users/mmantyla/Dropbox/Research - Publications/2017 Agile Book Chapter/Scripts/SetScopusApiKey.R") 
 

@@ -58,10 +58,10 @@ if (libPath %in% .libPaths() == FALSE)
   .libPaths(c(libPath,.libPaths()))
 }
 
-sc_api_key = "9d8cf209ec6c67867bc44a5247ad0e52"
+sc_api_key = "***"
 
-so_api_key = "9raZ36FkYGFHDSNrW)gdsw(("
+so_api_key = "***"
 
-tw_api_key = ""
+tw_api_key = "***"
 
 getoldtweets_path = paste(my_work_dir,"/GetOldTweets-java-master", sep="")

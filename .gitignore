@@ -2,3 +2,5 @@
 *.RData
 *.pdf
 *.png
+.Rhistory
+my_libs/
