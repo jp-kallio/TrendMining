@@ -5,9 +5,11 @@ library(magrittr)
 library(tm)
 library(wordcloud)
 
-my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
+my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"test", "automation", "paper", "can", "also")
+my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"), "test", "automation", "can", "please", "thanks", "like", "also", "using", "need", "know", "now", "one", "tried", "trying", "want", "just", "way", "help", "able", "get", "use", "however", "anyone", "see")
 #EDIT this row
-my_file <- "my_Scopus_TSE_articles_clean_data.RData"
+my_file <- "my_Scopus_ta_data.RData"
+my_file <- "my_STO_test_automation_data.RData"
 #draw_ComparisonCloud = function(my_file){
 
   my_temp_file = paste(my_data_dir, "/", sep="")
@@ -38,7 +40,7 @@ my_file <- "my_Scopus_TSE_articles_clean_data.RData"
                          
   comparison.cloud(tdm, max.words=50, rot.per=0, 
                    colors=brewer.pal(3,"Set1"),
-                   title.size=1.5)
+                   title.size=1.5, scale=c(3.3,0.2))
 
   rm(my_articles_2)
   print("Finished comparison cloud")
@@ -54,8 +56,8 @@ my_file <- "my_Scopus_TSE_articles_clean_data.RData"
     
   #This time we do four way split
   q1_t <- my_articles$Title[my_articles$Cites <= quantile(my_articles$Cites, probs = 0.25)]
-  q2_t <- my_articles$Title[my_articles$Cites > quantile(my_articles$Cites, probs = 0.25) &
-              my_articles$Cites <= quantile(my_articles$Cites, probs = 0.5)]
+  q2_t <- my_articles$Title[my_articles$Cites > quantile(abs(my_articles$Cites), probs = 0.25) &
+              my_articles$Cites <= quantile(abs(my_articles$Cites), probs = 0.5)]
   q3_t <- my_articles$Title[my_articles$Cites > quantile(my_articles$Cites, probs = 0.5) &
               my_articles$Cites <= quantile(my_articles$Cites, probs = 0.75)]
   q4_t <- my_articles$Title[my_articles$Cites > quantile(my_articles$Cites, probs = 0.75)]
