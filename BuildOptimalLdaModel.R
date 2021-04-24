@@ -16,13 +16,15 @@ library("tokenizers")
 #source ("mclapply.hack.R")
 
 #Set the file to be analyzed, e.g.
-my_file = "my_Scopus_TSE_articles_clean_data.RData"
+my_file <- "my_Scopus_ta_data.RData"
+my_file <- "my_STO_test_automation_data.RData"
 
 my_temp_file = paste(my_data_dir, "/", sep="")
 my_temp_file = paste(my_temp_file, my_file, sep="")
 load(my_temp_file)
 
-my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
+my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"test", "automation", "paper", "can", "also")
+my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"), "test", "automation", "can", "please", "thanks", "like", "also", "using", "need", "know", "now", "one", "tried", "trying", "want", "just", "way", "help", "able", "get", "use", "however", "anyone", "see")
 
 #Articles with NA dates cause false analysis later kick them out
 my_articles <- my_articles[which(!is.na(my_articles$Date)),]
@@ -48,7 +50,7 @@ vectorizer = vocab_vectorizer(v)
 dtm = create_dtm(it, vectorizer, type = "dgTMatrix")
 
 # we create 10 topics 
-lda_model = LDA$new(n_topics = 10, doc_topic_prior = 0.1, topic_word_prior = 0.01)
+lda_model = LDA$new(n_topics = 50, doc_topic_prior = 0.1, topic_word_prior = 0.01)
 doc_topic_distr = lda_model$fit_transform(x = dtm, n_iter = 1000, 
                           convergence_tol = 0.001, n_check_convergence = 25, 
                           #convergence_tol = 0.01, n_check_convergence = 25, 
@@ -87,13 +89,14 @@ DEoptim(optimalLda, lower, higher, DEoptim.control(strategy = 2, itermax = 10, N
 #lets apply the best input parameter and genera a model based on it. Then save it for further analysis (Analyze optimal model)--------------------
 
 #297.9555 0.2518732 0.005613016
+#104.5717 0.529851 0.000164
 
 tokens = my_articles$Clean_Text %>%  tokenize_words (strip_numeric = TRUE)
 it <- itoken(tokens, progressbar = FALSE)
 v = create_vocabulary(it) %>% prune_vocabulary(term_count_min = 10, doc_proportion_max = 0.3)
 vectorizer = vocab_vectorizer(v)
 dtm = create_dtm(it, vectorizer, type = "dgTMatrix")
-lda_model = LDA$new(n_topics = 298, doc_topic_prior = 0.2518732, topic_word_prior = 0.005613016)
+lda_model = LDA$new(n_topics = 50, doc_topic_prior = 0.1, topic_word_prior = 0.01)
 doc_topic_distr = lda_model$fit_transform(x = dtm, n_iter = 1000, 
                                           convergence_tol = 0.001, n_check_convergence = 25, 
                                           #convergence_tol = 0.01, n_check_convergence = 25, 

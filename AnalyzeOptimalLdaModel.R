@@ -10,7 +10,8 @@ library("text2vec")
 library("nnet") #Breaks ties at random when searching for max
 
 
-my_file = "my_Scopus_TSE_articles_clean_data.RData"
+my_file <- "my_Scopus_ta_data.RData"
+my_file <- "my_STO_test_automation_data.RData"
 #Articles. Make sure this is the same you used to build LDA model otherwise it will not make any sense
 my_temp_file = paste(my_data_dir, "/", sep="")
 my_temp_file = paste(my_temp_file, my_file, sep="")
@@ -29,7 +30,7 @@ load(my_LDAWinner_file)
 #Create important arrays with descriptive names
 #Documents to topics and get top 'n' terms for each topic
 Topics <- apply(doc_topic_distr, 1, function(x) which.is.max (x))
-Terms = lda_model$get_top_words(50)
+Terms = lda_model$get_top_words(50,lambda = 0.3)
 
 #Still in box......................................
 Titles = my_articles[,"Title"]
@@ -105,7 +106,7 @@ theta = doc_topic_distr
 #**************************************************************
 #year_limiter = (Years > 1978 & Years < 2015)
 #year_limiter = (Years > 1980 & Years < 1990)
-year_limiter = Years >= 2007
+#year_limiter = Years >= 2007
 Years = Years[year_limiter]
 years = levels(factor(unlist(Years)))
 
